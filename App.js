@@ -1,17 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import params from './src/params'
+import Field from './src/components/Field'
 
 export default class App extends Component {
   render() {
    return (
       <View style={styles.container}>
-        <Text>Iniciando o Mines!</Text>
-        <Text>
-           {params.getRowsAmount()}x{params.getColumnsAmount()}
-        </Text>
-        <StatusBar style="auto" />
+         <StatusBar style="auto" />
+
+         <Text>Iniciando o Mines!</Text>
+
+         <Text>
+            {params.getRowsAmount()}x{params.getColumnsAmount()}
+         </Text>
+
+         <Field />   
       </View>
     );
   }
