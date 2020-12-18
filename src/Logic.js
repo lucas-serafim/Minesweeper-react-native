@@ -92,7 +92,7 @@ const hadExplosion = board => fields(board).filter(field => field.exploded).leng
 
 const penddingFilds = field => (field.mined && !field.flagged) || (!field.mined && !field.opened)
 
-const wongame = board => fields(board).filter(pendding).length === 0
+const wongame = board => fields(board).filter(penddingFilds).length === 0
 
 const showMines = board => fields(board).filter(field => field.mined).forEach(field => field.opened = true)
 
