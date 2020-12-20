@@ -9,8 +9,9 @@ import {
    cloneBoard,
    openField,
    hadExplosion,
-   wongame,
+   wonGame,
    showMines,
+   invertFlag,
 } from './src/Logic'
 
 export default class App extends Component {
@@ -41,7 +42,7 @@ export default class App extends Component {
       const board = cloneBoard(this.state.board)
       openField(board, row, column)
       const lost = hadExplosion(board)
-      const won = wongame(board)
+      const won = wonGame(board)
 
       if (lost) {
          showMines(board)
@@ -53,6 +54,18 @@ export default class App extends Component {
       }
 
       this.setState({ board, lost, won })
+   }
+
+   onSelectField = (row, column) => {
+      const board = cloneBoard(this.state.board)
+      invertFlag(board, row, column)
+      const won = wonGame(board)
+
+      if (won) {
+         Alert.alert('Parabéns', "Você Venceu")
+      }
+
+      this.setState({ board, won })
    }
 
    render() {
@@ -67,7 +80,7 @@ export default class App extends Component {
          </Text>
 
          <View style = {styles.board}>
-            <MineField board = {this.state.board} onOpenField = {this.onOpenField}/>
+            <MineField board = {this.state.board} onOpenField = {this.onOpenField} onSelectField = {this.onSelectField}/>
          </View>
          
       </View>
