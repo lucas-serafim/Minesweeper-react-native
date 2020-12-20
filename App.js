@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 
 import params from './src/params'
+import Header from './src/components/Header'
 import MineField from './src/components/MineField'
 import {
    createMinedBoard,
@@ -12,6 +13,7 @@ import {
    wonGame,
    showMines,
    invertFlag,
+   flagsUsed
 } from './src/Logic'
 
 export default class App extends Component {
@@ -73,11 +75,7 @@ export default class App extends Component {
       <View style={styles.container}>
          <StatusBar style="auto" />
 
-         <Text>Iniciando o Mines!</Text>
-
-         <Text>
-            {params.getRowsAmount()}x{params.getColumnsAmount()}
-         </Text>
+         <Header flagsLeft = {this.minesAmount() - flagsUsed(this.state.board)} onNewGame = {() => this.setState(this.createState())} />
 
          <View style = {styles.board}>
             <MineField board = {this.state.board} onOpenField = {this.onOpenField} onSelectField = {this.onSelectField}/>
